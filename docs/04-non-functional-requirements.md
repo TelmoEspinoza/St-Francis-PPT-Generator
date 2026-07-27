@@ -5,7 +5,7 @@
 ## 1. Performance
 
 | Requirement | Target |
-|---|---|
+| --- | --- |
 | Generate a 10-slide deck | < 30 seconds end-to-end |
 | Generate a 50-slide deck | < 2 minutes |
 | API response for status check | < 200ms |

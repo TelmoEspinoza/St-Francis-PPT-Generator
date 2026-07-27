@@ -34,7 +34,7 @@ St Francis PPT-Generator is a web application that takes structured or unstructu
 ## 6. Success Metrics
 
 | Metric | Target |
-|---|---|
+| --- | --- |
 | Time to generate a 30+ slide document | < 10 minutes |
 | Manual edits needed after generation | < 5% of slides |
 | First-run success rate (no errors) | > 95% |
@@ -46,4 +46,3 @@ St Francis PPT-Generator is a web application that takes structured or unstructu
 - No enterprise compliance requirements at MVP(Minimun Viable Produc) stage.
 
 ## 8. Open Questions
-

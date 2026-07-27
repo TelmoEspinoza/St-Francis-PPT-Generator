@@ -8,33 +8,45 @@
 
 ```json
 {
-  "title": "Q3 Business Review",
-  "template": "modern-minimal",
+  "title": "Morning Prayer of the Church ",
+  "template": "Morning Prayer OT",
   "slides": [
     {
       "type": "title",
-      "title": "Q3 Business Review",
-      "subtitle": "Prepared by Tel — July 2026"
-    },
-    {
-      "type": "section_header",
-      "title": "Revenue Overview"
+      "title": "Morning Prayer of the Church (the Divine Office) ",
+      "subtitle": "Week 16 – Tuesday Ordinary Time "
     },
     {
       "type": "bullets",
-      "title": "Key Highlights",
+      "title": "Introduction",
       "bullets": [
-        "Revenue up 12% QoQ",
-        "3 new enterprise clients signed",
-        "Churn down to 2.1%"
+        "Leader: Lord, open our lips. ",
+        "All: And we shall praise your name.  "        
       ]
     },
     {
-      "type": "image_text",
-      "title": "Growth Chart",
-      "image_url": "assets/growth-chart.png",
-      "text": "Steady month-over-month growth across all regions."
-    }
+      "type": "title",
+      "title": "Invitatory Antiphon",
+      "subtitle": "Response:",
+      "text": "A mighty God is the Lord: 
+          come, let us adore him."
+    },
+    {
+      "type": "bullets",
+      "title": "Hymn",
+      "text": "Father, we praise you, now the night is over,
+                active and watchful, stand we all before you;
+                singing, we offer prayer and meditation: thus we adore you.
+
+                Monarch of all things, fit us for your mansions;
+                banish our weakness, health and wholeness sending;
+                bring us to heaven, where your saints united joy without ending.
+
+                All-holy Father, Son and equal Spirit,
+                Trinity blessed, send us your salvation;
+                yours is the glory, gleaming and resounding through all creation."
+    },
+    {....}
   ]
 }
 ```
@@ -42,63 +54,33 @@
 ### Slide Types (MVP)
 
 | type | fields | notes |
-|---|---|---|
+| --- | --- | --- |
 | `title` | `title`, `subtitle` | first slide only |
 | `section_header` | `title` | divider slide |
 | `bullets` | `title`, `bullets[]` | most common content slide |
 | `image_text` | `title`, `image_url`, `text` | image + supporting text |
 
-## 2. REST API (if built as a web service)
+## 2. REST API (built as a microservice)
 
-### `POST /decks/generate`
+### `POST /documents/generate`
 
-Request:
-```json
-{
-  "input": "raw text or markdown outline",
-  "input_format": "markdown",
-  "template": "modern-minimal",
-  "options": {
-    "max_bullets_per_slide": 5
-  }
-}
-```
 
-Response `202 Accepted`:
-```json
-{
-  "job_id": "d3f1...",
-  "status": "processing"
-}
-```
-
-### `GET /decks/{job_id}`
+### `GET /documents/{calendar_id}`
 
 Response `200 OK`:
+
 ```json
 {
-  "job_id": "d3f1...",
+  "calendar_id": "d3f1...",
   "status": "completed",
-  "download_url": "/decks/d3f1.../download",
+  "download_url": "/documents/d3f1.../download",
   "slide_count": 8
 }
 ```
 
-### `GET /decks/{job_id}/download`
+### `GET /documents/{job_id}/download`
 
 Returns the `.pptx` file binary (`Content-Type: application/vnd.openxmlformats-officedocument.presentationml.presentation`).
-
-### `GET /templates`
-
-Response `200 OK`:
-```json
-{
-  "templates": [
-    { "id": "modern-minimal", "name": "Modern Minimal", "preview_url": "..." },
-    { "id": "corporate-blue", "name": "Corporate Blue", "preview_url": "..." }
-  ]
-}
-```
 
 ## 3. Error Response Shape
 
@@ -106,15 +88,8 @@ Response `200 OK`:
 {
   "error": {
     "code": "INVALID_INPUT",
-    "message": "No headings found — at least one section is required.",
+    "message": "No info was found — at least one section is required.",
     "field": "input"
   }
 }
-```
-
-## 4. CLI Equivalent (if not building a web service)
-
-```
-pptgen generate --input notes.md --template modern-minimal --out deck.pptx
-pptgen templates list
 ```
