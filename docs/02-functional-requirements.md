@@ -15,7 +15,7 @@ Defines what the system must do (user-facing behavior). Non-functional targets l
 | US-02 | user | choose in a calendar a day template for morning or evening prayer | the document matches a consistent visual template |
 | US-03 | user | preview the generated slides before export | I can catch obvious issues early |
 | US-04 | user | download the result as a `.pptx` file | I can open and edit it in PowerPoint/Keynote |
-
+| US-05 | music director | give hyms and type magnificat | it get included in all ppts for that week  |
 ## 3. Functional Requirements
 
 | ID | Requirement | Priority |
