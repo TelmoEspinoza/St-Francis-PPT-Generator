@@ -1,4 +1,4 @@
-# Current Feature: Dashboard UI Phase 1 (PPT Generation)
+# Current Feature: CreationEndpointsPrototype (PPT Generation)
 
 ## Status
 
@@ -18,6 +18,7 @@ In Progress
   - BodyX = 30, BodyY = 40, BodyWidth = 900, BodyHeight = 500
   - LabelX = 354, LabelY = 22, LabelWidth = 567, LabelHeight = 40
 - Add placeholder content for sidebar and main area (just an h2 with "Sidebar" and "Main" for now)
+- Register `AddProblemDetails()` in `Program.cs` for standardized error responses
 
 ## Notes
 <!-- Any extra note -->
