@@ -6,8 +6,111 @@
 --Rellocate relationship. Before: table 'TypePrayer' link with PsalterDetail Now: It links to table 'Prayer'; 
 
 
+26/09/26
+--Seeding table calendar (a Sample row)
 */
 
+------------------26/09
+select * from ordo
+select * from Seasons
+select * from Psalter
+select * from PsalterDetail
+
+
+CREATE TABLE dbo.SeedingOrdo
+	(
+	IdWeek int IDENTITY (1,1) PRIMARY KEY,	
+	IdPsalter int,
+	Description nvarchar(50)
+	)  
+GO
+
+--insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 1')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 2')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 3')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 4')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 5')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 6')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 7')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 8')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 9')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 10')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 11')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 12')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 13')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 14')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 15')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 16')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 17')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 18')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 19')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 20')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 21')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 22')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 23')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 24')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 25')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 26')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 27')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 28')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 29')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 30')
+insert into SeedingOrdo (IdPsalter, Description) values (3,'Week 31')
+insert into SeedingOrdo (IdPsalter, Description) values (4,'Week 32')
+insert into SeedingOrdo (IdPsalter, Description) values (1,'Week 33')
+insert into SeedingOrdo (IdPsalter, Description) values (2,'Week 34')
+
+
+select  * from SeedingOrdo
+
+
+
+insert into Seasons (Description) values ('OT')
+
+insert into Ordo (IdSeason, WeekOrdo, WeekPsalter,DayInt,Code,Description)
+                       SELECT idSeason IdSeason
+                            ,(SELECT Description from SeedingOrdo where IdWeek=25) as WeekOrdo
+                            ,(SELECT IdPsalter from SeedingOrdo where IdWeek=25) as WeekPsalter
+                            ,6 as DayInt
+                            ,null as Code
+                            ,'Weekday, Ordinary Time 25' as Description
+                     FROM Seasons 
+                     where Description='OT'
+                     
+                     
+
+
+
+Select * from Ordo
+Select * from Calendar
+
+alter table Ordo drop column DayInt
+
+alter table Calendar alter column DayInt int null
+
+--Test
+Insert into Psalter (Template, Description, WeekPsalter)
+values ('MP Saturdays', 'Test - MP para Saturdays',null)
+
+select * from Psalter order by 1 desc
+
+Insert into Calendar (IdOrdo, Year, Date, Description,IdPsalter)
+select O.IdOrdo
+       , '2026' as Year
+       , CAST(GETDATE() AS DATE) as Date
+       , '6 MP - OT Week 25 Saturday' as Description
+       , (SELECT IdPsalter from Psalter where Template = 'MP Saturdays') as IdPsalter
+from Ordo O
+
+
+Select * from Calendar
+
+
+
+
+
+
+------------------21/09
 --DDL
 BEGIN TRANSACTION
 ALTER TABLE Psalter DROP CONSTRAINT FK_Template
